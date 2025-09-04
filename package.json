@@ -1,20 +1,15 @@
 {
-  "name": "travelai",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "travel-ai",
+  "version": "1.0.0",
+  "description": "Your Personalized AI Travel Companion",
+  "type": "commonjs",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "node build.js"
   },
   "dependencies": {
-    "@google/genai": "^0.8.0",
-    "marked": "^15.0.8"
+    "@google/genai": "^0.8.0"
   },
   "devDependencies": {
-    "@types/node": "^22.14.0",
-    "typescript": "~5.8.2",
-    "vite": "^6.2.0"
+    "esbuild": "^0.20.0"
   }
 }
