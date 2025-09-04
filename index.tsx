@@ -345,6 +345,43 @@ function renderTripPlannerScreen() {
   });
 }
 
+/**
+ * Generates a base64 image URL for a given destination.
+ * @param {string} destinationName The name of the destination.
+ * @param {string} destinationTitle The catchy title for the trip.
+ * @returns {Promise<string>} A promise that resolves to a base64 image data URL.
+ */
+async function generateDestinationImage(destinationName, destinationTitle) {
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    const prompt = `A beautiful, photorealistic travel photograph of ${destinationName}, embodying the feeling of "${destinationTitle}". High-quality, vibrant colors, stunning landscape/cityscape.`;
+
+    const response = await ai.models.generateImages({
+        model: 'imagen-4.0-generate-001',
+        prompt: prompt,
+        config: {
+            numberOfImages: 1,
+            outputMimeType: 'image/jpeg',
+            aspectRatio: '4:3', // Good aspect ratio for a card
+        },
+    });
+
+    const base64ImageBytes = response.generatedImages[0].image.imageBytes;
+    return `data:image/jpeg;base64,${base64ImageBytes}`;
+}
+
+/**
+ * Returns a placeholder image URL based on the destination type.
+ * @param {string} destinationType The type of destination (e.g., 'Beach').
+ * @returns {string} A URL to a placeholder image.
+ */
+function getDestinationImagePlaceholder(destinationType = '') {
+    const type = destinationType.toLowerCase();
+    if (type.includes('beach')) return 'https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg?auto=compress&cs=tinysrgb&w=600';
+    if (type.includes('hills')) return 'https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg?auto=compress&cs=tinysrgb&w=600';
+    if (type.includes('city')) return 'https://images.pexels.com/photos/2246476/pexels-photo-2246476.jpeg?auto=compress&cs=tinysrgb&w=600';
+    return 'https://images.pexels.com/photos/417054/pexels-photo-417054.jpeg?auto=compress&cs=tinysrgb&w=600'; // Default to international/general
+}
+
 async function renderAIDestinationSuggestions(tripData) {
     const mainContent = document.getElementById('main-content');
     if (!mainContent) return;
@@ -418,7 +455,29 @@ async function renderAIDestinationSuggestions(tripData) {
         });
 
         const suggestionsData = JSON.parse(response.text);
-        renderDestinationOptions(suggestionsData.suggestions, tripData);
+
+        // --- NEW: Generate images for each suggestion ---
+        const loadingMessage = mainContent.querySelector('.ai-loading-container p');
+        if (loadingMessage) {
+            loadingMessage.textContent = 'Generating stunning visuals for your trip...';
+        }
+
+        const imagePromises = suggestionsData.suggestions.map(suggestion => {
+            return generateDestinationImage(suggestion.destination, suggestion.title)
+                .catch(err => {
+                    console.error(`Failed to generate image for ${suggestion.destination}`, err);
+                    return getDestinationImagePlaceholder(tripData.destinationType); // Fallback
+                });
+        });
+
+        const imageUrls = await Promise.all(imagePromises);
+
+        const suggestionsWithImages = suggestionsData.suggestions.map((suggestion, index) => ({
+            ...suggestion,
+            imageUrl: imageUrls[index]
+        }));
+        
+        renderDestinationOptions(suggestionsWithImages, tripData);
 
     } catch (error) {
         console.error("Error generating destination suggestions:", error);
@@ -440,10 +499,13 @@ function renderDestinationOptions(suggestions, tripData) {
 
     const optionsHTML = suggestions.map(option => `
         <div class="destination-option-card">
-            <h3>${option.title}</h3>
-            <h4>📍 ${option.destination}</h4>
-            <p>${option.description}</p>
-            <button class="btn btn-primary generate-itinerary-btn" data-destination="${option.destination}">Generate Itinerary</button>
+            <img src="${option.imageUrl}" alt="AI-generated image of ${option.destination}">
+            <div class="destination-option-card-content">
+                <h3>${option.title}</h3>
+                <h4>📍 ${option.destination}</h4>
+                <p>${option.description}</p>
+                <button class="btn btn-primary generate-itinerary-btn" data-destination="${option.destination}">Generate Itinerary</button>
+            </div>
         </div>
     `).join('');
 

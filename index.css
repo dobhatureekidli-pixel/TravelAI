@@ -1060,20 +1060,34 @@ main {
   gap: 2rem;
   margin-bottom: 2.5rem;
 }
+
+/* REDESIGNED DESTINATION CARD */
 .destination-option-card {
-  background-color: #f9f9f9;
+  background-color: var(--white);
   border: 1px solid #ddd;
   border-radius: 12px;
-  padding: 2rem;
   text-align: left;
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 .destination-option-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
   border-color: var(--green);
+}
+.destination-option-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.destination-option-card-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 .destination-option-card h3 {
   color: var(--green);
@@ -1093,6 +1107,7 @@ main {
 }
 .destination-option-card .btn {
   width: 100%;
+  margin-top: auto;
 }
 
 
