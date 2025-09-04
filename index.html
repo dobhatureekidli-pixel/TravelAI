@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TravelAI - Your Personalized Travel Companion</title>
+    <link rel="stylesheet" href="index.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/genai": "https://esm.sh/@google/genai@^0.8.0",
+          "marked": "https://esm.sh/marked@^15.0.8"
+        }
+      }
+    </script>
+    <script type="module" src="index.tsx"></script>
+  </head>
+  <body>
+    <div id="app">
+      <header class="app-header">
+        <div class="header-content">
+          <div class="logo">
+            <h1>TravelAI</h1>
+            <p>Your Personalized Travel Companion</p>
+          </div>
+          <nav class="auth-buttons" id="auth-nav">
+            <button id="loginBtn" class="btn btn-secondary">Login</button>
+            <button id="signUpBtn" class="btn btn-primary">Sign Up</button>
+          </nav>
+        </div>
+      </header>
+
+      <main id="main-content">
+        <section class="hero-section">
+          <div class="hero-content">
+            <h1>Your Journey, Reimagined by AI</h1>
+            <p class="hero-subtitle">
+              From the tranquil backwaters of Kerala to the majestic peaks of the
+              Andes, our intelligent platform crafts unique travel experiences
+              perfectly tailored to you. Stop dreaming, start exploring.
+            </p>
+            <button class="btn btn-primary btn-large">
+              Discover Your Next Adventure
+            </button>
+          </div>
+        </section>
+
+        <section class="features-section">
+          <h2>An Entire Travel Agency in Your Pocket</h2>
+          <div class="features-grid">
+            <div class="feature-card">
+              <img
+                src="https://images.pexels.com/photos/3889742/pexels-photo-3889742.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="AI-powered itinerary"
+              />
+              <h3>AI-Powered Itineraries</h3>
+              <p>
+                Get bespoke travel plans matching your interests, pace, and
+                budget. Our AI curates trips just for you.
+              </p>
+            </div>
+            <div class="feature-card">
+              <img
+                src="https://images.pexels.com/photos/1603650/pexels-photo-1603650.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="Local Indian food"
+              />
+              <h3>Made for Indian Travelers</h3>
+              <p>
+                Find the best local experiences, vegetarian-friendly
+                restaurants, and travel tips that understand your needs.
+              </p>
+            </div>
+            <div class="feature-card">
+              <img
+                src="https://images.pexels.com/photos/753331/pexels-photo-753331.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="Hidden Gem Finder"
+              />
+              <h3>Hidden Gem Finder</h3>
+              <p>
+                Discover experiences off the beaten path, curated by AI based on
+                your unique travel style.
+              </p>
+            </div>
+            <div class="feature-card">
+              <img
+                src="https://images.pexels.com/photos/3184423/pexels-photo-3184423.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="Budget Optimization"
+              />
+              <h3>Smart Budget Optimization</h3>
+              <p>
+                Our AI finds the perfect balance between luxury and savings,
+                optimizing your budget for maximum experience.
+              </p>
+            </div>
+            <div class="feature-card">
+              <img
+                src="https://images.pexels.com/photos/1570779/pexels-photo-1570779.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="Seamless booking"
+              />
+              <h3>Seamless Booking</h3>
+              <p>
+                Book flights, hotels, and activities all in one place. Enjoy
+                exclusive deals and a hassle-free experience.
+              </p>
+            </div>
+            <div class="feature-card">
+              <img
+                src="https://images.pexels.com/photos/4353813/pexels-photo-4353813.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt="Cultural Guides"
+              />
+              <h3>Cultural & Etiquette Guides</h3>
+              <p>
+                Travel respectfully with AI-generated guides on local customs,
+                etiquette, and essential phrases for your destination.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="journey-section">
+          <h2>From Dream to Destination in 5 Simple Steps</h2>
+          <div class="journey-road-container">
+            <svg class="journey-road-svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet">
+              <path d="M 100 50 C 700 50, 100 550, 700 550" />
+            </svg>
+
+            <div class="journey-step" id="step-1">
+              <div class="journey-dot"></div>
+              <div class="journey-content">
+                <h3>1. Spark Your Imagination</h3>
+                <p>
+                  Tell us your dream, your travel style, your budget, and even
+                  your dietary preferences. The more we know, the better.
+                </p>
+              </div>
+            </div>
+
+            <div class="journey-step" id="step-2">
+              <div class="journey-dot"></div>
+              <div class="journey-content">
+                <h3>2. AI-Crafted Preview</h3>
+                <p>
+                  In minutes, receive a stunning, personalized itinerary
+                  proposal. It's a beautiful, visual preview of your journey.
+                </p>
+              </div>
+            </div>
+
+            <div class="journey-step" id="step-3">
+              <div class="journey-dot"></div>
+              <div class="journey-content">
+                <h3>3. Refine & Perfect</h3>
+                <p>
+                  Collaborate with our AI assistant. Swap a museum for a market,
+                  a quiet dinner for a vibrant food tour—tweak every detail.
+                </p>
+              </div>
+            </div>
+
+            <div class="journey-step" id="step-4">
+              <div class="journey-dot"></div>
+              <div class="journey-content">
+                <h3>4. One-Click Booking</h3>
+                <p>
+                  Once you're happy, confirm everything—flights, stays, and
+                  activities—with a single click. We handle the rest.
+                </p>
+              </div>
+            </div>
+
+            <div class="journey-step" id="step-5">
+              <div class="journey-dot"></div>
+              <div class="journey-content">
+                <h3>5. Journey with a Genius</h3>
+                <p>
+                  Travel with a 24/7 AI companion for real-time assistance,
+                  translations, and recommendations on the go.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="testimonials-section">
+          <h2>Hear From Our Happy Travelers</h2>
+          <div class="testimonials-grid">
+            <div class="testimonial-card">
+              <div class="star-rating">★★★★★</div>
+              <blockquote>
+                "TravelAI planned our family trip to Rajasthan flawlessly. The
+                AI understood our needs for kid-friendly activities and great
+                food. It felt like magic!"
+              </blockquote>
+              <cite>— The Sharma Family, Mumbai</cite>
+            </div>
+            <div class="testimonial-card">
+              <div class="star-rating">★★★★★</div>
+              <blockquote>
+                "As a solo traveler, safety and unique experiences are my top
+                priorities. The app found incredible hidden gems in Vietnam and
+                the 24/7 AI assistant made me feel secure."
+              </blockquote>
+              <cite>— Priya R., Bangalore</cite>
+            </div>
+            <div class="testimonial-card">
+              <div class="star-rating">★★★★★</div>
+              <blockquote>
+                "I used to spend weeks planning our holidays. Now, I just tell
+                TravelAI our budget and interests, and we get a perfect
+                itinerary in minutes. Game-changer!"
+              </blockquote>
+              <cite>— Arjun & Meera, Delhi</cite>
+            </div>
+          </div>
+        </section>
+
+        <section class="visual-inspiration-section">
+            <h2>Visual Inspiration</h2>
+            <div class="inspiration-grid">
+                <div class="inspiration-card">
+                    <img src="https://images.pexels.com/photos/3727255/pexels-photo-3727255.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Scenic view of Santorini, Greece">
+                    <div class="inspiration-overlay"><span>Santorini, Greece</span></div>
+                </div>
+                <div class="inspiration-card">
+                    <img src="https://images.pexels.com/photos/1591373/pexels-photo-1591373.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Colorful hot air balloons in Cappadocia, Turkey">
+                    <div class="inspiration-overlay"><span>Cappadocia, Turkey</span></div>
+                </div>
+                <div class="inspiration-card">
+                    <img src="https://images.pexels.com/photos/2166553/pexels-photo-2166553.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Mountain landscape in Banff, Canada">
+                    <div class="inspiration-overlay"><span>Banff, Canada</span></div>
+                </div>
+                <div class="inspiration-card">
+                    <img src="https://images.pexels.com/photos/247819/pexels-photo-247819.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fushimi Inari Shrine in Kyoto, Japan">
+                    <div class="inspiration-overlay"><span>Kyoto, Japan</span></div>
+                </div>
+                <div class="inspiration-card">
+                    <img src="https://images.pexels.com/photos/699466/pexels-photo-699466.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Eiffel Tower in Paris, France">
+                    <div class="inspiration-overlay"><span>Paris, France</span></div>
+                </div>
+                <div class="inspiration-card">
+                    <img src="https://images.pexels.com/photos/3601425/pexels-photo-3601425.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Tropical beach in the Maldives">
+                    <div class="inspiration-overlay"><span>Maldives</span></div>
+                </div>
+            </div>
+        </section>
+
+      </main>
+
+      <footer class="app-footer">
+        <p>&copy; 2024 TravelAI. All rights reserved.</p>
+        <nav class="footer-links">
+          <a href="#">Contact</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </nav>
+      </footer>
+    </div>
+  </body>
+</html>
