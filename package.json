@@ -4,12 +4,14 @@
   "description": "Your Personalized AI Travel Companion",
   "type": "commonjs",
   "scripts": {
-    "build": "node build.js"
+    "build": "node build.js",
+    "deploy": "wrangler pages deploy"
   },
   "dependencies": {
     "@google/genai": "^0.8.0"
   },
   "devDependencies": {
-    "esbuild": "^0.20.0"
+    "esbuild": "^0.20.0",
+    "wrangler": "^3.57.0"
   }
 }
