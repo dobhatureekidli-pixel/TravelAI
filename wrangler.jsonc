@@ -1,0 +1,5 @@
+{
+  "name": "travel-ai-worker", // Replace with a unique name for your Worker
+  "compatibility_date": "2025-09-04", // Keep this date or update it to today's date
+  "main": "src/index.ts" // This tells Wrangler where your main Worker script is
+}
